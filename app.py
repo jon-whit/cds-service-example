@@ -10,11 +10,11 @@ def discovery():
     'services': [
       {
         'hook': 'patient-view',
-        'name': 'Static CDS Service in Python',
-        'description': 'An example static CDS service in Python',
+        'name': 'Solutionreach CDS Service',
+        'description': 'An example CDS service',
         'id': 'static',
         'prefetch': {
-          'patient': 'Patient/{{Patient.id}}'
+          'patient': 'Patient/{{context.patientId}}'
         }
       }
     ]
@@ -22,20 +22,22 @@ def discovery():
 
 @app.route('/cds-services/static', methods=['POST'])
 def service():
-  card1 = card('Success Card', 'success', link('Static CDS Service', 'http://example.com'))
+  card1 = card('Success Card', 'success', link('Solutionreach CDS Service', 'http://example.com'))
   card1['detail'] = 'This is a test of a static success card.'
   card1['links'].append(link('Google', 'https://google.com'))
   card1['links'].append(link('Github', 'https://github.com'))
 
-  source = link('Static CDS Service')
+  source = link('Solutionreach CDS Service')
 
   card2 = card('Info card', 'info', source)
   card3 = card('Warning card', 'warning', source)
+  card3['links'].append(link('SR Conversations', 'localhost:8080/conversations/4357301321'))
   card4 = card('Hard stop card', 'hard-stop', source)
 
 
   return json.jsonify({
-    'cards': [card1, card2, card3, card4]
+    #'cards': [card1, card2, card3, card4]
+    'cards': [card3]
   })
 
 def card(summary, indicator, source):
