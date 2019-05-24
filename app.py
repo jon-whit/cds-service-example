@@ -31,7 +31,8 @@ def service():
 
   card2 = card('Info card', 'info', source)
   card3 = card('SR Conversations', 'info', source)
-  card3['links'].append(link('SR Conversations', 'localhost:8080/conversations/4357301321'))
+  card3['detail'] = "Patient has not confirmed tomorrow's Appointment"
+  card3['links'].append(link('Launch SR Conversations', 'localhost:8080/conversations/4357301321'))
   card4 = card('Hard stop card', 'hard-stop', source)
 
 
